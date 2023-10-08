@@ -1,0 +1,102 @@
+
+<h2>Meal Plans</h2>
+
+<div class="meal-plan-container">
+  <div class="day-selector">
+    <h3>Select a Day:</h3>
+    <ul>
+      <li *ngFor="let day of ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']"
+        [class.selected]="day === selectedDay"
+        (click)="selectedDay = day; selectedMeal = ''; clearSelection()">
+        {{ day }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="meal-selector" *ngIf="selectedDay">
+    <h3>Select a Meal:</h3>
+    <ul>
+      <li *ngFor="let meal of ['Breakfast', 'Lunch', 'Dinner', 'Snack']"
+        [class.selected]="meal === selectedMeal"
+        (click)="selectedMeal = meal; clearSelection()">
+        {{ meal }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="recipe-selector" *ngIf="selectedDay && selectedMeal">
+    <h3>Select a Recipe:</h3>
+    <ul>
+      <li *ngFor="let recipe of favorite"
+        (click)="selectRecipe(recipe)">
+        {{ recipe.title }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="meal-plan" *ngIf="selectedDay && selectedMeal">
+    <h3>Meal Plan for {{ selectedDay }} - {{ selectedMeal }}</h3>
+    <ul>
+      <li *ngFor="let recipe of mealPlans[selectedDay]?.[selectedMeal]">
+        {{ recipe.title }}
+        <button (click)="removeFromMealPlan(selectedDay, selectedMeal, recipe)">Remove</button>
+      </li>
+    </ul>
+    <div *ngIf="selectedRecipe" class="selectedRecipe">
+      <h4>Selected Recipe: {{ selectedRecipe.title }}</h4>
+      <button (click)="addToMealPlans(selectedDay, selectedMeal, selectedRecipe)">Add to Meal Plan</button>
+    </div>
+  </div>
+</div>
+
+
+ <!-- <h2>Meal Plans</h2>
+
+<div class="meal-plan-container">
+  <div class="day-selector">
+    <h3>Select a Day:</h3>
+    <ul>
+      <li *ngFor="let day of ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']"
+        [class.selected]="day === selectedDay"
+        (click)="selectedDay = day; selectedMeal = ''; clearSelection()">
+        {{ day }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="meal-selector" *ngIf="selectedDay">
+    <h3>Select a Meal:</h3>
+    <ul>
+      <li *ngFor="let meal of ['Breakfast', 'Lunch', 'Dinner', 'Snack']"
+        [class.selected]="meal === selectedMeal"
+        (click)="selectedMeal = meal; clearSelection()">
+        {{ meal }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="recipe-selector" *ngIf="selectedDay && selectedMeal">
+    <h3>Select a Recipe:</h3>
+    <ul>
+      <li *ngFor="let recipe of favorite"
+        (click)="selectRecipe(recipe)">
+        {{ recipe.title }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="meal-plan" *ngIf="selectedDay && selectedMeal">
+    <h3>Meal Plan for {{ selectedDay }} - {{ selectedMeal }}</h3>
+    <ul>
+      <li *ngFor="let recipe of mealPlans | filter: { day: selectedDay, meal: selectedMeal }"
+        (click)="removeFromMealPlan(selectedDay, selectedMeal, recipe)">
+        {{ recipe.title }}
+        <button (click)="removeFromMealPlan(selectedDay, selectedMeal, recipe)">Remove</button>
+      </li>
+    </ul>
+    <div *ngIf="selectedRecipe" class="selectedRecipe">
+      <h4>Selected Recipe: {{ selectedRecipe.title }}</h4>
+      <button (click)="addToMealPlans(selectedDay, selectedMeal, selectedRecipe)">Add to Meal Plan</button>
+    </div>
+  </div>
+</div> -->

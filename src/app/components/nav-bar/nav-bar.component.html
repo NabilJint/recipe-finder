@@ -1,0 +1,19 @@
+<div class="nav-bar">
+    <div class="logo">
+        <h1><i class="fa fa-cutlery"></i>Recipe Finder</h1>
+    </div>
+    <p class="slogan">
+        Discover Delicious Recipes...
+    </p>
+    <ul class="nav-links">
+        <li>
+            <a routerLink="/search" [class.selected]="isActive('/search')"><i class="fa fa-search"></i>Search</a>
+        </li>
+        <li>
+            <a routerLink="/favorites" [class.selected]="isActive('/favorites')"><i class="fa fa-star"></i>Favorites<span class="counter" [ngClass]="{'active': favoriteRecipes.length > 0}">{{ favoriteRecipes.length }}</span></a>
+        </li>
+        <li>
+            <a routerLink="/meal-plan" [class.selected]="isActive('/meal-plan')"><i class="fa fa-calendar"></i>Meal Plan</a>
+        </li>
+    </ul>
+</div>

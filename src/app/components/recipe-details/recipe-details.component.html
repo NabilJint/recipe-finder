@@ -1,0 +1,21 @@
+<div *ngIf="recipe">
+    <h2>{{recipe.title}}</h2>
+    <img [src]="recipe.image" alt="{{recipe.title}}">
+    <p>Ready in: {{recipe.readyInMinutes}} minutes</p>
+    <p>Servings: {{recipe.servings}}</p>
+    <h3>Ingredients:</h3>
+    <ul>
+        <li *ngFor="let ingredients of recipe.extendedIngredients">
+            {{ingredients.original}}
+        </li>
+    </ul>
+    <h3>Instructions:</h3>
+    <ol>
+        <li *ngFor="let step of recipe.analyzedInstructions[0].steps">
+            {{step.step}}
+        </li>
+    </ol>
+    <button class="favorites-button" [ngClass]="{'add-favorite':!isFavorite,'remove-favorite':isFavorite}"
+    (click)="toggleFavorite()"><i class="fa " [ngClass]="{'fa-heart':isFavorite,'fa-heart-o':!isFavorite}"></i> {{isFavorite ? 'Remove from Favorites': 'Add to Favorites'}} </button>
+    <!-- <button class="meal-button" (click)="addToMealPlan()">Add to Meal Plan</button> -->
+</div>

@@ -1,0 +1,31 @@
+
+<div class="search">
+    <form (submit)="searchRecipes()">
+        <label for="searchInput">Search for recipes:</label>
+        <input type="text" [(ngModel)]="searchQuery" name="searchQuery" id="searchInput" placeholder="Search for recipes">
+        <button type="submit"><i class="fa fa-search"></i>
+            Search</button>
+    </form>
+</div>
+
+<!-- <div class="recipes">
+    <ul>
+        <li *ngFor="let recipe of recipes">
+            <img [src]="recipe.image" alt="{{recipe.title}} image">
+            <h2> {{recipe.title}} </h2>
+            <p>Ready in {{recipe.readyInMinutes}} minutes </p>
+            <a [routerLink]="['/recipe', recipe.id]">more</a>
+        </li>
+    </ul>
+</div> -->
+<div class="recipes">
+    <ul>
+        <li *ngFor="let recipe of recipes">
+            <a [routerLink]="['/recipe', recipe.id]">
+                <img [src]="recipe.image" alt="{{recipe.title}} image">
+                <h2> {{recipe.title}} </h2>
+                <p>Ready in {{recipe.readyInMinutes}} minutes </p>
+            </a>
+        </li>
+    </ul>
+</div>
