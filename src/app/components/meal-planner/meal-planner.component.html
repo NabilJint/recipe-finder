@@ -1,12 +1,10 @@
-
 <h2>Meal Plans</h2>
 
 <div class="meal-plan-container">
   <div class="day-selector">
     <h3>Select a Day:</h3>
     <ul>
-      <li *ngFor="let day of ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']"
-        [class.selected]="day === selectedDay"
+      <li *ngFor="let day of this.mealPlanDayArray" [class.selected]="day === selectedDay"
         (click)="selectedDay = day; selectedMeal = ''; clearSelection()">
         {{ day }}
       </li>
@@ -16,8 +14,7 @@
   <div class="meal-selector" *ngIf="selectedDay">
     <h3>Select a Meal:</h3>
     <ul>
-      <li *ngFor="let meal of ['Breakfast', 'Lunch', 'Dinner', 'Snack']"
-        [class.selected]="meal === selectedMeal"
+      <li *ngFor="let meal of this.mealPlanTypeArray" [class.selected]="meal === selectedMeal"
         (click)="selectedMeal = meal; clearSelection()">
         {{ meal }}
       </li>
@@ -27,8 +24,7 @@
   <div class="recipe-selector" *ngIf="selectedDay && selectedMeal">
     <h3>Select a Recipe:</h3>
     <ul>
-      <li *ngFor="let recipe of favorite"
-        (click)="selectRecipe(recipe)">
+      <li *ngFor="let recipe of favorite" (click)="selectRecipe(recipe)">
         {{ recipe.title }}
       </li>
     </ul>
@@ -37,20 +33,20 @@
   <div class="meal-plan" *ngIf="selectedDay && selectedMeal">
     <h3>Meal Plan for {{ selectedDay }} - {{ selectedMeal }}</h3>
     <ul>
-      <li *ngFor="let recipe of mealPlans[selectedDay]?.[selectedMeal]">
+      <li *ngFor="let recipe of this.currentRecipes">
         {{ recipe.title }}
-        <button (click)="removeFromMealPlan(selectedDay, selectedMeal, recipe)">Remove</button>
+        <button (click)="removeFromMealPlan(recipe, selectedDay, selectedMeal)">Remove</button>
       </li>
     </ul>
     <div *ngIf="selectedRecipe" class="selectedRecipe">
       <h4>Selected Recipe: {{ selectedRecipe.title }}</h4>
-      <button (click)="addToMealPlans(selectedDay, selectedMeal, selectedRecipe)">Add to Meal Plan</button>
+      <button (click)="addToMealPlans(selectedRecipe, selectedDay, selectedMeal)">Add to Meal Plan</button>
     </div>
   </div>
 </div>
 
 
- <!-- <h2>Meal Plans</h2>
+<!-- <h2>Meal Plans</h2>
 
 <div class="meal-plan-container">
   <div class="day-selector">
